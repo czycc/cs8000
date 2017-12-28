@@ -8,11 +8,27 @@ use EasyWeChat;
 
 class WechatController extends Controller
 {
-    public function AccessToken()
+    public function AccessToken(Request $request)
     {
+        dd($request->url);
         $app = EasyWeChat::officialAccount();
-        $accessToken = $app->access_token;
-        $token = $accessToken->getToken();
-        return $token;
+        $app->jssdk->setUrl($request->url);
+        $api = [
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'onVoicePlayEnd',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'translateVoice'
+        ];
+        return $app->jssdk->buildConfig($api, true);
     }
 }
