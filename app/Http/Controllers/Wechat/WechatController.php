@@ -10,7 +10,6 @@ class WechatController extends Controller
 {
     public function AccessToken(Request $request)
     {
-        dd($request->url);
         $app = EasyWeChat::officialAccount();
         $app->jssdk->setUrl($request->url);
         $api = [
